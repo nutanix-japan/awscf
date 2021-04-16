@@ -4,11 +4,11 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: ami-06098fd00463352b6
-      KeyName: ariesbabu-nutanix
-      SecurityGroupIds: 
+      KeyName: ariesbabu-xxxxx
+      SecurityGroupIds:
       - sg-0f314e329091af371
       UserData:
-              'Fn::Base64': 
+              'Fn::Base64':
                 !Sub |
                   #!/bin/bash
                   yum -y update
