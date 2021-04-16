@@ -1,0 +1,61 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`fiesta.lab.local`)
+    kind: Rule
+    services:
+    - name: fiesta-web-svc
+      port: 3000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute-grafana
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`grafana.lab.local`)
+    kind: Rule
+    services:
+    - name: grafana
+      port: 3000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+  namespace: kasten-io
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`k10.lab.local`)
+    kind: Rule
+    services:
+    - name: gateway
+      port: 8000
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`fiesta.lab.local`)
+    kind: Rule
+    services:
+    - name: fiesta-web-svc
+      port: 3000
+

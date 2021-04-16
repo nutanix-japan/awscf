@@ -1,0 +1,20 @@
+Resources:
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-06098fd00463352b6
+      KeyName: ariesbabu-nutanix
+      SecurityGroupIds: 
+      - sg-0f314e329091af371
+      UserData:
+              'Fn::Base64': 
+                !Sub |
+                  #!/bin/bash
+                  yum -y update
+                  #Install docker
+                  sudo amazon-linux-extras install docker
+                  sudo yum install docker -y
+                  sudo service docker start
+                  sudo usermod -a -G docker ec2-user
+                  docker info

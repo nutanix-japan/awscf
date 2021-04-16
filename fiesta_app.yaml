@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiesta-web-pods
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: fiesta-web
+  template:
+    metadata:
+      labels:
+        run: fiesta-web
+    spec:
+      containers:
+      - name: npm-fiesta
+        image: public.ecr.aws/n5p3f3u5/npm-fiesta:latest
+        env:
+        - name: DB_PASSWD
+          value: fiesta
+        - name: DB_USER
+          value: fiesta
+        - name: DB_SERVER
+          value: 10.55.4.53
+        - name: DB_TYPE
+          value: mysql
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fiesta-web-svc
+  namespace: default
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+  selector:
+    run: fiesta-web
