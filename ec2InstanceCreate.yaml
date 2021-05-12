@@ -1,10 +1,10 @@
 Resources:
-  Ec2Instance:
+  MyInstance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
       ImageId: ami-06098fd00463352b6
-      KeyName: ariesbabu-xxxxx
+      KeyName: ariesbabu-nutanix
       SecurityGroupIds:
       - sg-0f314e329091af371
       UserData:
@@ -18,3 +18,7 @@ Resources:
                   sudo service docker start
                   sudo usermod -a -G docker ec2-user
                   docker info
+  MyEP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref MyInstance

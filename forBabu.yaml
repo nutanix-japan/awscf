@@ -1,0 +1,31 @@
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-084b69b0301fbfa9f
+      KeyName: babu-tokyo
+      SecurityGroupIds:
+      - sg-de20fb97
+  MyEP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref MyInstance
+
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "http,ssh public"
+      GroupName: http-ssh-public  # セキュリティグループの名前 を記載
+      SecurityGroupIngress:
+            -
+              IpProtocol: tcp
+              FromPort : 80
+              ToPort : 80
+              CidrIp: 0.0.0.0/0
+            -
+              IpProtocol: tcp
+              FromPort : 22
+              ToPort : 22
+              CidrIp: 0.0.0.0/0
+      VpcId: vpc-XXXXXXXXXXX  # VPC ID を記載
