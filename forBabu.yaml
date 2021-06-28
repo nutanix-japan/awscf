@@ -16,7 +16,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "http,ssh public"
-      GroupName: http-ssh-public  # セキュリティグループの名前 を記載
+      GroupName: http-ssh-public 
       SecurityGroupIngress:
             -
               IpProtocol: tcp
@@ -28,4 +28,4 @@ Resources:
               FromPort : 22
               ToPort : 22
               CidrIp: 0.0.0.0/0
-      VpcId: vpc-XXXXXXXXXXX  # VPC ID を記載
+      VpcId: vpc-XXXXXXXXXXX  
